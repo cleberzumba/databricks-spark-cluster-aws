@@ -2,19 +2,19 @@
 
 ## Overview
 
-This project documents the creation and configuration of an Apache Spark cluster using Databricks on AWS Marketplace.
+This project documents the creation and configuration of an Apache Spark cluster using Databricks on AWS.
 
-The cluster is designed for distributed data processing using PySpark.
+The cluster is designed for distributed data processing using PySpark in a production-like environment.
 
 ---
 
 ## Architecture
 
-* Cloud Provider: AWS
-* Platform: Databricks (via AWS Marketplace)
-* Cluster Type: All-purpose compute
-* Processing Engine: Apache Spark 4.0
-* Language: Python (PySpark)
+- Cloud Provider: AWS
+- Platform: Databricks
+- Cluster Type: All-purpose compute
+- Processing Engine: Apache Spark 3.4.1
+- Language: Python (PySpark)
 
 ---
 
@@ -22,81 +22,80 @@ The cluster is designed for distributed data processing using PySpark.
 
 ### General
 
-* Cluster Name: cluster-spark-prod
-* Policy: Unrestricted
+- Cluster Name: cluster-spark
+- Policy: Unrestricted
 
 ### Runtime
 
-* Databricks Runtime: 17.3 LTS
-* Spark Version: 4.0.0
-* Scala Version: 2.13
-* Photon Acceleration: Enabled
+- Databricks Runtime: 13.3 LTS
+- Spark Version: 3.4.1
+- Scala Version: 2.12
+- Photon Acceleration: Enabled
 
 ### Infrastructure
 
-* Driver Node (Master): Auto (Databricks managed)
-* Worker Nodes: 2
+- Driver Node: Databricks managed
+- Worker Nodes: 2
 
 #### Worker Configuration
 
-* Instance Type: r5d.large
-* Memory: 16 GB
-* vCPUs: 2
+- Instance Type: m5d.xlarge
+- Memory: 16 GB
+- vCPUs: 4
 
 ---
 
 ## Scaling Configuration
 
-* Autoscaling: Enabled
-* Minimum Workers: 2
-* Maximum Workers: 2
+- Autoscaling: Enabled
+- Minimum Workers: 2
+- Maximum Workers: 2
 
-> Fixed cluster with 2 workers
+> Fixed-size distributed cluster (2 workers)
 
 ---
 
 ## Cost Optimization
 
-* Spot Instances: Enabled
-* Auto Termination: 30 minutes
+- Auto Termination: 30 minutes
 
 ---
 
 ## Features Enabled
 
-* Photon Engine (optimized execution)
-* Distributed Processing (Spark cluster)
-* Auto Scaling (fixed range)
+- Photon Engine (optimized execution)
+- Distributed processing using Spark
+- Cluster autoscaling (fixed range)
 
 ---
 
 ## Notes
 
-* Cluster created via AWS Marketplace integration
-* Billing is handled through AWS account
-* Instance types may be restricted due to trial limitations
+- Workspace created using Databricks Account Console
+- AWS IAM roles and S3 storage configured automatically
+- Billing is handled through AWS account
 
 ---
 
 ## How to Start the Cluster
 
 1. Go to **Compute**
-2. Select cluster-spark-prod
+2. Select `cluster-spark`
 3. Click **Start**
-4. Wait until status is Running
+4. Wait until status is **Running**
 
 ---
 
 ## Next Steps
 
-* Create Databricks Notebook
-* Run PySpark jobs
-* Build data pipeline
-* Integrate with S3 / Delta Lake
+- Create Databricks Notebook
+- Run PySpark jobs
+- Build data pipelines
+- Integrate with S3 and Delta Lake
 
 ---
 
 ## Author
 
-Cleber Zumba de Souza
+Cleber Zumba de Souza  
 Data Engineer
