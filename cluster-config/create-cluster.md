@@ -22,3 +22,19 @@
 - Instance Type: m5d.xlarge
 - Memory: 16 GB
 - vCPUs: 4
+
+## How to Start the Cluster
+
+1. Go to **Compute**
+2. Select `cluster-spark`
+3. Click **Start**
+4. Wait until status is **Running**
+
+---
+
+## Next Steps
+
+- Create Databricks Notebook
+- Run PySpark jobs
+- Build data pipelines
+- Integrate with S3 and Delta Lake
