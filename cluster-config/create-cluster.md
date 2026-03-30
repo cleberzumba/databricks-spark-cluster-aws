@@ -1,14 +1,22 @@
-# Cluster Creation
+## Cluster Creation
 
-## Configuration
+- Cluster Name: cluster-spark
+- Policy: Unrestricted
 
-- Cluster Name: cluster-platform-admin-demo
-- Runtime: Databricks Runtime 13.x LTS
-- Mode: Standard
-- Autoscaling: 1-2 workers
-- Auto termination: 30 minutes
+### Runtime
 
-## Decisions
+- Databricks Runtime: 13.3 LTS
+- Spark Version: 3.4.1
+- Scala Version: 2.12
+- Photon Acceleration: Enabled
 
-- Used autoscaling to optimize cost
-- Selected LTS runtime for stability
+### Infrastructure
+
+- Driver Node: Databricks managed
+- Worker Nodes: 2
+
+#### Worker Configuration
+
+- Instance Type: m5d.xlarge
+- Memory: 16 GB
+- vCPUs: 4
