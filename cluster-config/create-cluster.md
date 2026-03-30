@@ -30,11 +30,4 @@
 3. Click **Start**
 4. Wait until status is **Running**
 
----
 
-## Next Steps
-
-- Create Databricks Notebook
-- Run PySpark jobs
-- Build data pipelines
-- Integrate with S3 and Delta Lake
