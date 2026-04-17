@@ -6,7 +6,7 @@
 # MAGIC - **Regular UDFs** - Python functions wrapped as Spark UDFs
 # MAGIC - **Pandas UDFs** - Vectorized UDFs (faster, uses Arrow)
 # MAGIC - **When to use UDFs** vs built-in functions
-# MAGIC - **Stateless vs Stateful UDFs** - EXAM CRITICAL!
+# MAGIC - **Stateless vs Stateful UDFs** 
 # MAGIC - Built-in functions (concat, when, coalesce, etc.)
 
 # COMMAND ----------
