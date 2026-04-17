@@ -97,11 +97,11 @@ processed_stream = (streaming_df
 # MAGIC
 # MAGIC ### Three Output Modes:
 # MAGIC
-# MAGIC | Mode | Behavior | Use Case |
-# MAGIC |------|----------|----------|
-# MAGIC | **append** | Only new rows (default) | Non-aggregated queries |
-# MAGIC | **update** | New + updated rows | Aggregations with updates |
-# MAGIC | **complete** | Entire result table | Aggregations, small results |
+# MAGIC | Mode         | Behavior                | Use Case                    |
+# MAGIC |--------------|-------------------------|-----------------------------|
+# MAGIC | **append**   | Only new rows (default) | Non-aggregated queries      |
+# MAGIC | **update**   | New + updated rows      | Aggregations with updates   |
+# MAGIC | **complete** | Entire result table     | Aggregations, small results |
 
 # COMMAND ----------
 
