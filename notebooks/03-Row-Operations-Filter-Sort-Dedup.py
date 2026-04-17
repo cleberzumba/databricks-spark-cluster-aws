@@ -121,13 +121,13 @@ result2.show()
 # MAGIC
 # MAGIC ### CRITICAL DIFFERENCES:
 # MAGIC
-# MAGIC | Feature | sort() | orderBy() |
-# MAGIC |---------|--------|-----------|
-# MAGIC | **Syntax** | Can use column names as strings | Prefers Column objects |
-# MAGIC | **Multiple columns** | `sort("col1", "col2")` | `orderBy("col1", "col2")` |
-# MAGIC | **Descending** | `sort(col("x").desc())` | `orderBy(col("x").desc())` |
-# MAGIC | **Ascending param** | `sort("col", ascending=False)` | N/A - use desc() |
-# MAGIC | **Recommendation** | More Pythonic | More Java/Scala-like |
+# MAGIC | Feature              | sort()                          | orderBy()                  |
+# MAGIC |----------------------|---------------------------------|----------------------------|
+# MAGIC | **Syntax**           | Can use column names as strings | Prefers Column objects     |
+# MAGIC | **Multiple columns** | `sort("col1", "col2")`          | `orderBy("col1", "col2")`  |
+# MAGIC | **Descending**       | `sort(col("x").desc())`         | `orderBy(col("x").desc())` |
+# MAGIC | **Ascending param**  | `sort("col", ascending=False)`  | N/A - use desc()           |
+# MAGIC | **Recommendation**   | More Pythonic                   | More Java/Scala-like       |
 # MAGIC
 # MAGIC - Both do the SAME thing (sorting)
 
@@ -234,12 +234,12 @@ df.dropDuplicates().show()
 # MAGIC %md
 # MAGIC ## 8. Handling NULL Values - dropna() and fillna()
 # MAGIC
-# MAGIC | Method | Parameters | Behavior |
-# MAGIC |--------|-----------|----------|
-# MAGIC | `dropna()` | No params | Drops rows with ANY null |
-# MAGIC | `dropna("all")` | how="all" | Drops rows where ALL values are null |
-# MAGIC | `dropna("any")` | how="any" | Drops rows with ANY null (default) |
-# MAGIC | `dropna(subset=["col"])` | subset | Only check specific columns for nulls |
+# MAGIC | Method                   | Parameters | Behavior                              |
+# MAGIC |--------------------------|------------|---------------------------------------|
+# MAGIC | `dropna()`               | No params  | Drops rows with ANY null              |
+# MAGIC | `dropna("all")`          | how="all"  | Drops rows where ALL values are null  |
+# MAGIC | `dropna("any")`          | how="any"  | Drops rows with ANY null (default)    |
+# MAGIC | `dropna(subset=["col"])` | subset     | Only check specific columns for nulls |
 
 # COMMAND ----------
 
