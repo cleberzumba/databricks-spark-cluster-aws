@@ -5,7 +5,7 @@
 # MAGIC - `join()` - Join DataFrames
 # MAGIC - Join types: `inner`, `left`, `right`, `outer`, `cross`, `left_anti`, `left_semi`
 # MAGIC - `broadcast()` 
-# MAGIC - `union()` / `unionAll()` / `unionByName()` - Combine rows
+# MAGIC - `union()` / `unionAll()` (deprecated)/ `unionByName()` - Combine rows
 # MAGIC - Multiple join keys
 # MAGIC - Handling duplicate column names after joins
 
@@ -328,7 +328,7 @@ result = employees1.union(employees2)
 print(f"union result: {result.count()} rows")
 result.show()
 
-# unionAll - same as union (keeps duplicates)
+# unionAll - same as union (keeps duplicates) - (deprecated)
 result2 = employees1.unionAll(employees2)
 print(f"unionAll result: {result2.count()} rows")
 result2.show()
