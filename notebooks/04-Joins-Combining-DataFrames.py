@@ -455,3 +455,6 @@ result.show()
 # MAGIC - You need custom logic (UDF, map, etc.)
 # MAGIC - The data is small (KB / a few MB)
 # MAGIC - It can't be resolved with a join
+# MAGIC
+# MAGIC
+# MAGIC  **Broadcast variables are rarely used in modern pipelines because we avoid UDFs. I prefer broadcast joins or native Spark functions to leverage Catalyst.**
