@@ -134,4 +134,4 @@ BroadcastHashJoin
 
 
 
-👉 posso te dar **um problema real de 600TB (igual seu cenário)** e te fazer otimizar como em entrevista técnica.
+
