@@ -1,137 +1,169 @@
 # Databricks notebooks source
+
 # MAGIC %md
-# MAGIC Notebook 11: Shuffle - Ocorre em operações wide (join, groupBy, distinct)
+# MAGIC Notebook 11: Shuffle - Occurs in wide operations (join, groupBy, distinct)
 # MAGIC
 # MAGIC - Broadcast vs Shuffle
 # MAGIC - Execution Plan (`explain`)
 # MAGIC - Join Strategies
-# MAGIC - Particionamento
+# MAGIC - Partitioning
 # MAGIC - Data Skew
-# MAGIC - Catalyst
+# MAGIC - Catalyst Optimizer
 
 # COMMAND ------------ 
 
 # MAGIC %md
-# MAGIC - Exemplo (generates shuffle)
+# MAGIC Example (generates shuffle)
 
 # COMMAND ------------ 
 
 df.groupBy("dept_id").count().explain("formatted")
 
-# You'll see:
+# You will see:
+# Exchange
 
-Exchange
+# MAGIC %md
+# MAGIC This means: **shuffle is happening**
 
-# MAGIC That mean: **shuffle happening**
+# COMMAND ------------ 
+
 # MAGIC %md
 # MAGIC Execution Plan (`explain()`)
-# MAGIC - Exemplo com join
+# MAGIC Example with join
 
 from pyspark.sql.functions import broadcast
 
 df = employees.join(broadcast(departments), "dept_id")
 df.explain("formatted")
 
-# MAGIC What to look out for:
+# MAGIC %md
+# MAGIC What to look for:
+# MAGIC
+# MAGIC - `BroadcastHashJoin` -> broadcast applied  
+# MAGIC - `Exchange` -> shuffle  
+# MAGIC - `Scan` -> data reading  
 
-`BroadcastHashJoin` -> broadcast applied
-`Exchange` -> shuffle
-`Scan` -> data reading
+# COMMAND ------------ 
 
----
+# MAGIC %md
+# MAGIC Join Strategies
 
-# MAGIC - Join Strategies
-
-# MAGIC - Broadcast Hash Join
+# MAGIC %md
+# MAGIC Broadcast Hash Join
 
 employees.join(broadcast(departments), "dept_id").explain()
 
-# MAGIC - Expected:
+# MAGIC %md
+# MAGIC Expected:
+# MAGIC
+# MAGIC BroadcastHashJoin
 
-BroadcastHashJoin
+# COMMAND ------------ 
 
-# MAGIC - Sort Merge Join (pattern)
+# MAGIC %md
+# MAGIC Sort Merge Join (pattern)
 
 employees.join(departments, "dept_id").explain()
 
-# MAGIC - Expected:
-
-SortMergeJoin
-Exchange
-
-# MAGIC - Particionamento
+# MAGIC %md
+# MAGIC Expected:
 # MAGIC
-# MAGIC - Repartition (generates shuffle)
+# MAGIC SortMergeJoin  
+# MAGIC Exchange
+
+# COMMAND ------------ 
+
+# MAGIC %md
+# MAGIC Partitioning
+# MAGIC
+# MAGIC Repartition (generates shuffle)
 
 df = employees.repartition(10)
 df.rdd.getNumPartitions()
 
-# MAGIC - Coalesce (don't generates shuffle)
+# MAGIC %md
+# MAGIC Coalesce (does NOT generate shuffle)
 
 df = employees.coalesce(2)
 df.rdd.getNumPartitions()
 
-# MAGIC - Data Skew
+# COMMAND ------------ 
+
+# MAGIC %md
+# MAGIC Data Skew
 # MAGIC
-# MAGIC - Simulando skew
+# MAGIC Simulating skew
 
 data = [(1, "A")] * 1000000 + [(2, "B")] * 10
 df = spark.createDataFrame(data, ["key", "value"])
 
 df.groupBy("key").count().show()
 
-# MAGIC - chave `1` concentra quase tudo
-# MAGIC
-# MAGIC - Solução simples (salting)
+# MAGIC %md
+# MAGIC Key `1` concentrates most of the data
 
-from pyspark.sql.functions import rand, concat
+# MAGIC %md
+# MAGIC Simple solution (salting)
+
+from pyspark.sql.functions import rand
 
 df_salted = df.withColumn("salt", (rand() * 10).cast("int"))
 
-# MAGIC - Catalyst Optimizer
+# COMMAND ------------ 
+
+# MAGIC %md
+# MAGIC Catalyst Optimizer
 # MAGIC
-# MAGIC - Exemplo (column pruning)
+# MAGIC Example (column pruning)
 
 employees.select("emp_id").explain("formatted")
 
-# MAGIC - Spark lê **apenas a coluna necessária**
-# MAGIC 
-# MAGIC - Predicate Pushdown
+# MAGIC %md
+# MAGIC Spark reads **only the required column**
+
+# MAGIC %md
+# MAGIC Predicate Pushdown
 
 employees.filter("dept_id = 1").explain("formatted")
 
-# MAGIC - filtro aplicado na leitura (mais eficiente)
-# MAGIC
+# MAGIC %md
+# MAGIC Filter is applied during data reading (more efficient)
 
-# MAGIC - Boas práticas de Join
-# MAGIC 
-# MAGIC - ERRADO (pesado)
+# COMMAND ------------ 
+
+# MAGIC %md
+# MAGIC Join Best Practices
+# MAGIC
+# MAGIC WRONG (expensive)
 
 employees.join(departments, "dept_id")
 
-# MAGIC - CERTO (otimizado)
+# MAGIC %md
+# MAGIC CORRECT (optimized)
 
 employees.select("emp_id", "dept_id") \
     .join(broadcast(departments.select("dept_id", "dept_name")), "dept_id")
 
-# MAGIC - Detecção de problemas
-# MAGIC 
-# MAGIC - Identificar shuffle
+# COMMAND ------------ 
+
+# MAGIC %md
+# MAGIC Detecting performance issues
+# MAGIC
+# MAGIC Identify shuffle
 
 df.explain("formatted")
 
-# MAGIC - procure:
+# MAGIC %md
+# MAGIC Look for:
+# MAGIC
+# MAGIC Exchange
 
-Exchange
-
-# MAGIC - Identificar broadcast
+# MAGIC %md
+# MAGIC Identify broadcast
 
 df.explain()
 
-# MAGIC - procure:
-
-BroadcastHashJoin
-
-
-
-
+# MAGIC %md
+# MAGIC Look for:
+# MAGIC
+# MAGIC BroadcastHashJoin
