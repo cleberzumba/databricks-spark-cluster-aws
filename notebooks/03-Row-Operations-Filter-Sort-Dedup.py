@@ -159,8 +159,9 @@ df.orderBy(col("salary").asc()).show()
 df.sort(col("salary").desc()).show()
 df.orderBy(col("salary").desc()).show()
 
-# METHOD 2: Using ascending parameter (sort() only!)
+# METHOD 2: Using ascending parameter (sort() and orderBy()!)
 df.sort("salary", ascending=False).show()
+df.orderBy("salary", ascending=False).show() 
 
 # METHOD 3: Using desc() imported function
 from pyspark.sql.functions import desc, asc
