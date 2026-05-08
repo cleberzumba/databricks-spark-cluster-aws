@@ -265,7 +265,7 @@ df.dropna(subset=["salary"]).show()
 # MAGIC "Which code fragment will return a new DataFrame from storesDF that excludes
 # MAGIC all rows containing at least one missing value in any column?"
 # MAGIC
-# MAGIC **Answer: C. storesDF.na.drop()** or **storesDF.dropna()**
+# MAGIC **Answer: storesDF.na.drop()** or **storesDF.dropna()**
 
 # COMMAND ----------
 
