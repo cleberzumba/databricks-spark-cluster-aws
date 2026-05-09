@@ -1,28 +1,20 @@
-# Databricks Cluster Setup (AWS)
+# databricks-spark-engineering
 
-## Overview
+> Distributed data engineering with Apache Spark, PySpark and Databricks.
 
-This project documents the creation and configuration of an Apache Spark cluster using Databricks on AWS.
+A deep-dive repository covering Spark internals, PySpark API patterns, 
+performance tuning, Delta Lake, Unity Catalog and Structured Streaming — 
+built around real-world data engineering challenges.
 
-The cluster is designed for distributed data processing using PySpark in a production-like environment.
+## Stack
 
----
+`AWS` · `Databricks Runtime 13.3 LTS` · `Apache Spark 3.4.1` · 
+`PySpark` · `Delta Lake` · `Unity Catalog` · `Amazon S3`
 
-## Architecture
+## Topics
 
-- Cloud Provider: AWS
-- Platform: Databricks
-- Cluster Type: All-purpose compute
-- Processing Engine: Apache Spark 3.4.1
-- Language: Python (PySpark)
-
----
-
-## Notes
-
-- Workspace created using Databricks Account Console
-- AWS IAM roles and S3 storage configured automatically
-- Billing is handled through AWS account
+Spark Core · PySpark API · Performance Tuning · Delta Lake · 
+Databricks Platform · Structured Streaming · Schema Management
 
 ---
 
