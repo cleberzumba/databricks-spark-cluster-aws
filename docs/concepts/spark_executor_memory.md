@@ -1,4 +1,4 @@
-# Spark Executor Memory Anatomy
+# Spark Executor Memory
 
 > A deep dive into how `spark.executor.memory` is actually distributed across regions, and how each Spark memory configuration affects the slicing.
 
