@@ -34,7 +34,7 @@ df.printSchema()
 #  |-- amount: double
 ```
 
-> ⚠️ Spark reads only the schema of the first file — `customer` and `region` columns are **ignored**.
+> Spark reads only the schema of the first file — `customer` and `region` columns are **ignored**.
 
 ---
 
@@ -49,8 +49,8 @@ df.printSchema()
 # root
 #  |-- id:       long
 #  |-- amount:   double
-#  |-- customer: string   ← included ✅
-#  |-- region:   string   ← included ✅
+#  |-- customer: string   ← included
+#  |-- region:   string   ← included
 ```
 
 ### Result:
@@ -103,7 +103,7 @@ df_without.printSchema()  # ← incomplete schema
 df_with = spark.read \
     .option("mergeSchema", "true") \
     .parquet("/tmp/sales/")
-df_with.printSchema()  # ← unified schema ✅
+df_with.printSchema()  # ← unified schema
 df_with.show()
 ```
 
@@ -129,20 +129,20 @@ df.write \
 
 ---
 
-## ⚠️ Performance Considerations
+## Performance Considerations
 
 `mergeSchema = true` has a **performance cost**:
 
 - Spark reads the schema (footer) of **every file** in the directory
-- In directories with thousands of files, this can be **slow** ❌
+- In directories with thousands of files, this can be **slow**
 
 ### When to use:
 
 | Scenario | Recommendation |
 |---|---|
-| Schema actually evolved over time | ✅ Use it |
-| Unsure if schemas are identical | ✅ Use it |
-| Schemas are known to be identical | ❌ Don't use (default `false` is faster) |
+| Schema actually evolved over time | Use it |
+| Unsure if schemas are identical | Use it |
+| Schemas are known to be identical | Don't use (default `false` is faster) |
 
 ---
 
