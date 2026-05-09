@@ -157,7 +157,3 @@ df.write \
 - **Schema Evolution** — gradual change of data structure over time
 - **Delta Lake `mergeSchema`** — equivalent option for Delta tables on write
 - **`spark.sql.parquet.mergeSchema`** — equivalent global config
-
----
-
-*Tags: #ApacheSpark #PySpark #Parquet #DataEngineering #SchemaEvolution*
